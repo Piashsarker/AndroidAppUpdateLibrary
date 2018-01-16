@@ -38,5 +38,17 @@ Remember to add below  permission in `Manifest.xml file` . And Also add runtime 
         <external-path name="external_files" path="."/>
       </paths>
  
+ #### Step 5. For downloading and installing the apk automatically.
+ 
+ After setting up all neccessary files it's just two line of code to download and install the apk updates in your device. 
+  	
+	String url = "http://androidpala.com/tutorial/app-debug.apk";
+	
+	DownloadApk downloadApk = new DownloadApk(MainActivity.this);
+       	
+	downloadApk.startDownloadingApk(url);
+ 
+ 
+ 
  <b> You are Good To Go. Happy Coding </b> 
  
