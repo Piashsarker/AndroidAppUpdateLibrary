@@ -31,7 +31,7 @@ Remember to add below  permission in `Manifest.xml file` . And Also add runtime 
      <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
  
  ####  Step 4. Add Provider XML 
- Create a folder called `xml` in `res` folder called `provider_paths`. Paste below code: 
+ Create a folder called `xml` in `res` folder. Create a xml file and named it `provider_paths`. Paste below code: 
  
     <?xml version="1.0" encoding="utf-8"?>
       <paths xmlns:android="http://schemas.android.com/apk/res/android">
