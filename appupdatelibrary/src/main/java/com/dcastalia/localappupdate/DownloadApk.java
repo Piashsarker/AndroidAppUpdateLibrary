@@ -54,15 +54,15 @@ public class DownloadApk extends Activity{
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            if(bar==null){
+                bar = new ProgressDialog(context);
+                bar.setCancelable(false);
+                bar.setMessage("Downloading...");
+                bar.setIndeterminate(true);
+                bar.setCanceledOnTouchOutside(false);
+                bar.show();
+            }
 
-            bar = new ProgressDialog(context);
-            bar.setCancelable(false);
-
-            bar.setMessage("Downloading...");
-
-            bar.setIndeterminate(true);
-            bar.setCanceledOnTouchOutside(false);
-            bar.show();
 
         }
 
@@ -88,8 +88,11 @@ public class DownloadApk extends Activity{
         protected void onPostExecute(Boolean result) {
             // TODO Auto-generated method stub
             super.onPostExecute(result);
+            if(bar.isShowing() && bar!=null){
+                bar.dismiss();
+                bar=null;
+            }
 
-            bar.dismiss();
 
             if(result){
 

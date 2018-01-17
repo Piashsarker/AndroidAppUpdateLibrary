@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/LocalApkUpdateLibrary.iml" filepath="$PROJECT_DIR$/LocalApkUpdateLibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/appupdatelibrary/appupdatelibrary.iml" filepath="$PROJECT_DIR$/appupdatelibrary/appupdatelibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/appupdatelibrary/localappupdate.iml" filepath="$PROJECT_DIR$/appupdatelibrary/localappupdate.iml" />
     </modules>
   </component>
