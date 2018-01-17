@@ -14,8 +14,10 @@ import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
@@ -69,6 +71,7 @@ public class DownloadApk extends Activity{
         protected void onProgressUpdate(Integer... progress) {
             super.onProgressUpdate(progress);
 
+
             bar.setIndeterminate(false);
             bar.setMax(100);
             bar.setProgress(progress[0]);
@@ -111,20 +114,15 @@ public class DownloadApk extends Activity{
         @Override
         protected Boolean doInBackground(String... arg0) {
             Boolean flag = false;
-
             try {
                 URL url = new URL(downloadUrl);
-
                 HttpURLConnection c = (HttpURLConnection) url.openConnection();
                 c.setRequestMethod("GET");
                 c.setDoOutput(true);
                 c.connect();
-
-
                 String PATH = Environment.getExternalStorageDirectory()+"/Download/";
                 File file = new File(PATH);
                 file.mkdirs();
-
                 File outputFile = new File(file,"app-debug.apk");
 
                 if(outputFile.exists()){
@@ -134,7 +132,7 @@ public class DownloadApk extends Activity{
                 FileOutputStream fos = new FileOutputStream(outputFile);
                 InputStream is = c.getInputStream();
 
-                int total_size = 1431692;//size of apk
+                int total_size = c.getContentLength();//size of apk
 
                 byte[] buffer = new byte[1024];
                 int len1 = 0;
@@ -148,13 +146,13 @@ public class DownloadApk extends Activity{
                 }
                 fos.close();
                 is.close();
-
                 OpenNewVersion(PATH);
-
                 flag = true;
-            } catch (Exception e) {
+            } catch (MalformedURLException e) {
                 Log.e(TAG, "Update Error: " + e.getMessage());
                 flag = false;
+            }catch (IOException ex){
+                ex.printStackTrace();
             }
             return flag;
 
