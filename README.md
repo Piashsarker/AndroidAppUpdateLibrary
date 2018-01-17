@@ -39,8 +39,11 @@ Remember to add below  permission in `Manifest.xml file` . And Also add runtime 
       </paths>
       
  Add below code in your `manifest.xml` file.    
-  `   <application
-        ..........................................................
+ 
+
+    <application
+      
+	..............
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="${applicationId}.provider"
@@ -52,7 +55,8 @@ Remember to add below  permission in `Manifest.xml file` . And Also add runtime 
         </provider>
 
 
-    </application>`
+    </application>
+
  
  #### Step 5. For downloading and installing the apk automatically.
  
