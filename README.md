@@ -37,6 +37,22 @@ Remember to add below  permission in `Manifest.xml file` . And Also add runtime 
       <paths xmlns:android="http://schemas.android.com/apk/res/android">
         <external-path name="external_files" path="."/>
       </paths>
+      
+ Add below code in your `manifest.xml` file.    
+  `   <application
+        ..........................................................
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths"/>
+        </provider>
+
+
+    </application>`
  
  #### Step 5. For downloading and installing the apk automatically.
  
