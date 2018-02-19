@@ -1,11 +1,22 @@
 # AndroidAppUpdateLibrary
 Android App Update Library can be used for downloading the Apk from a link , Save it to External or Internal Storage, Than automatic installing the apk. Remember to add provider xml and android runtime permission before using this library. See sample use in app folder.
 
+### Changelog 
+
+    Version : 1.0.3 
+    
+    Update Target SDK Version To 27 ( Android Oreo)
+    Added Permission For Package Install For Android Oreo.
+
+
+
+
 [![](https://jitpack.io/v/Piashsarker/AndroidAppUpdateLibrary.svg)](https://jitpack.io/#Piashsarker/AndroidAppUpdateLibrary)
 
 ![AndroidAppUpdateLibrary](https://github.com/Piashsarker/AndroidAppUpdateLibrary/blob/master/AppUpdateLibrary.gif)
 
 ## Usage 
+
 #### Step 1. Add the JitPack repository to your build file 
 
 Add it in your root build.gradle at the end of repositories: </br> 
@@ -21,7 +32,7 @@ Add it in your root build.gradle at the end of repositories: </br>
 #### Step 2. Add the dependency
 
 	dependencies {
-	        compile 'com.github.Piashsarker:AndroidAppUpdateLibrary:1.0.2'
+	        compile 'com.github.Piashsarker:AndroidAppUpdateLibrary:1.0.3'
 	}
   
   
@@ -32,6 +43,9 @@ Remember to add below  permission in `Manifest.xml file` . And Also add runtime 
      <uses-permission android:name="android.permission.INTERNET"/>
   
      <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+     
+      <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/> 
+     
  
  ####  Step 4. Add Provider XML 
  Create a folder called `xml` in `res` folder. Create a xml file and named it `provider_paths`. Paste below code: 
@@ -65,7 +79,7 @@ Remember to add below  permission in `Manifest.xml file` . And Also add runtime 
  
  After setting up all neccessary files it's just two line of code to download and install the apk updates in your device. 
   	
-	String url = "http://androidpala.com/tutorial/app-debug.apk";
+	String url = "https://github.com/Piashsarker/AndroidAppUpdateLibrary/raw/master/app-debug.apk";
 	
 	DownloadApk downloadApk = new DownloadApk(MainActivity.this);
        	
