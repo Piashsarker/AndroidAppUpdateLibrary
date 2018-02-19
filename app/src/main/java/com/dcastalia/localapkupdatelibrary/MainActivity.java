@@ -1,23 +1,35 @@
 package com.dcastalia.localapkupdatelibrary;
 
 import android.Manifest;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dcastalia.localappupdate.DownloadApk;
 
 public class MainActivity extends AppCompatActivity {
     private static final int MY_PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE = 1001;
-
+    private TextView versionText ;
+    private String version;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        try {
+            PackageInfo pInfo = this.getPackageManager().getPackageInfo(getPackageName(), 0);
+             version = pInfo.versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        versionText=  findViewById(R.id.txt_version);
+        versionText.setText("Current Version "+version);
     }
 
     /** TODO: Must need to check the External Storage Permission Because we are storing the
@@ -67,6 +79,6 @@ public class MainActivity extends AppCompatActivity {
         DownloadApk downloadApk = new DownloadApk(MainActivity.this);
 
         /** For Starting download call the method startDownLoadingApk() by passing the URL **/
-        downloadApk.startDownloadingApk("http://androidpala.com/tutorial/app-debug.apk");
+        downloadApk.startDownloadingApk("https://github.com/Piashsarker/AndroidAppUpdateLibrary/raw/master/app-debug.apk");
     }
 }
