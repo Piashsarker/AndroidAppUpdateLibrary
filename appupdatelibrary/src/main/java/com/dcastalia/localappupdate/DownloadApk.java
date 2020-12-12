@@ -118,7 +118,6 @@ public class DownloadApk extends Activity{
                 URL url = new URL(downloadUrl);
                 HttpURLConnection c = (HttpURLConnection) url.openConnection();
                 c.setRequestMethod("GET");
-                c.setDoOutput(true);
                 c.connect();
                 String PATH = Environment.getExternalStorageDirectory()+"/Download/";
                 File file = new File(PATH);
@@ -164,10 +163,9 @@ public class DownloadApk extends Activity{
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setDataAndType(getUriFromFile(location),
                 "application/vnd.android.package-archive");
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         context.startActivity(intent);
-        activity.finish();
 
     }
 
