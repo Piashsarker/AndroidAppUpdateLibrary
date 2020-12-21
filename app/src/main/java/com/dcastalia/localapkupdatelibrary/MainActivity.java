@@ -3,14 +3,13 @@ package com.dcastalia.localapkupdatelibrary;
 import android.Manifest;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import com.dcastalia.localappupdate.DownloadApk;
 
@@ -38,10 +37,10 @@ public class MainActivity extends AppCompatActivity {
     private void checkWriteExternalStoragePermission() {
 
         if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-            /** If we have permission than we can Start the Download the task **/
+            // If we have permission than we can Start the Download the task
             downloadTask();
         } else {
-            /** If we don't have permission than requesting  the permission **/
+            //  If we don't have permission than requesting  the permission
             requestWriteExternalStoragePermission();
         }
     }
@@ -67,18 +66,17 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void download(View view) {
-        /** First check the external storage permission.**/
+        // First check the external storage permission
       checkWriteExternalStoragePermission();
     }
 
     private void downloadTask() {
-        /** This @DownloadApk class is provided by our Library **/
-        /** Pass the  Context when creating object of DownlodApk **
-         */
+        // This @DownloadApk class is provided by our library
+        // Pass the Context when creating object of DownloadApk
 
         DownloadApk downloadApk = new DownloadApk(MainActivity.this);
 
-        /** For Starting download call the method startDownLoadingApk() by passing the URL **/
+        // For starting download call the method startDownloadingApk() by passing the URL
         downloadApk.startDownloadingApk("https://github.com/Piashsarker/AndroidAppUpdateLibrary/raw/master/app-debug.apk");
     }
 }
