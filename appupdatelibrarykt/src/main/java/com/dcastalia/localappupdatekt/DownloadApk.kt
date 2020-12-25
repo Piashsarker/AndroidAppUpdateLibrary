@@ -23,56 +23,46 @@ import java.net.URL
  * Created by piashsarker on 1/16/18, rewritten by Cyb3rKo on 12/21/20.
  */
 
-class DownloadApk(context: Context) : AppCompatActivity() {
-    private var bar: ProgressDialog? = null
-    private var context = context
-    private var downloadUrl = ""
-    private val TAG = "DownloadApk"
+class DownloadApk(var context: Context) : AppCompatActivity() {
 
     fun startDownloadingApk(url: String) {
-        downloadUrl = url
-        if (URLUtil.isValidUrl(downloadUrl)) {
-            DownloadNewVersion().execute()
+        if (URLUtil.isValidUrl(url)) {
+            DownloadNewVersion(context, url).execute()
         }
     }
 
-    private inner class DownloadNewVersion : AsyncTask<String, Int, Boolean>() {
+    private class DownloadNewVersion(val context: Context, val downloadUrl: String): AsyncTask<String, Int, Boolean>() {
+        private lateinit var bar: ProgressDialog
         override fun onPreExecute() {
             super.onPreExecute()
-            bar = ProgressDialog(context)
-            bar!!.setCancelable(false)
-            bar!!.setMessage("Downloading...")
-            bar!!.isIndeterminate = true
-            bar!!.setCanceledOnTouchOutside(false)
-            bar!!.show()
+            bar = ProgressDialog(context).apply {
+                setCancelable(false)
+                setMessage("Downloading...")
+                isIndeterminate = true
+                setCanceledOnTouchOutside(false)
+                show()
+            }
         }
 
         override fun onProgressUpdate(vararg values: Int?) {
             super.onProgressUpdate(*values)
-            if (bar != null) {
-                bar!!.isIndeterminate = false
-                bar!!.max = 100
-                var msg = ""
-                val progress = values[0]
-                if (progress != null && bar != null) {
-                    bar!!.progress = progress
-                    msg = if (progress > 99) {
-                        "Finishing... "
-                    } else {
-                        "Downloading... $progress%"
-                    }
-                }
-                bar!!.setMessage(msg)
+            var msg = ""
+            val progress = values[0]
+            if (progress != null) {
+                bar.progress = progress
+                msg = if (progress > 99) "Finishing... " else "Downloading... $progress%"
+            }
+
+            bar.apply {
+                isIndeterminate  = false
+                max = 100
+                setMessage(msg)
             }
         }
 
         override fun onPostExecute(result: Boolean?) {
             super.onPostExecute(result)
-            if (bar != null && bar?.isShowing == true) {
-                bar!!.dismiss()
-                bar = null
-            }
-
+            bar.dismiss()
             if (result != null && result) {
                 Toast.makeText(context, "Update Done", Toast.LENGTH_SHORT)
                     .show()
@@ -116,7 +106,7 @@ class DownloadApk(context: Context) : AppCompatActivity() {
                 openNewVersion(path)
                 flag = true
             } catch (e: MalformedURLException) {
-                Log.e(TAG, "Update Error: " + e.message)
+                Log.e("DownloadApk", "Update Error: " + e.message)
                 flag = false
             } catch (e: IOException) {
                 e.printStackTrace()
@@ -124,27 +114,27 @@ class DownloadApk(context: Context) : AppCompatActivity() {
 
             return flag
         }
-    }
 
-    private fun openNewVersion(location: String) {
-        val intent = Intent(Intent.ACTION_VIEW)
-        intent.setDataAndType(
-            getUriFromFile(location),
-            "application/vnd.android.package-archive"
-        )
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-        context.startActivity(intent)
-    }
-
-    private fun getUriFromFile(location: String): Uri {
-        return if (Build.VERSION.SDK_INT < 24) {
-            Uri.fromFile(File(location + "app-debug.apk"))
-        } else {
-            FileProvider.getUriForFile(
-                context, context.packageName + ".provider",
-                File(location + "app-debug.apk")
+        private fun openNewVersion(location: String) {
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.setDataAndType(
+                getUriFromFile(location),
+                "application/vnd.android.package-archive"
             )
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            context.startActivity(intent)
+        }
+
+        private fun getUriFromFile(location: String): Uri {
+            return if (Build.VERSION.SDK_INT < 24) {
+                Uri.fromFile(File(location + "app-debug.apk"))
+            } else {
+                FileProvider.getUriForFile(
+                    context, context.packageName + ".provider",
+                    File(location + "app-debug.apk")
+                )
+            }
         }
     }
 }
