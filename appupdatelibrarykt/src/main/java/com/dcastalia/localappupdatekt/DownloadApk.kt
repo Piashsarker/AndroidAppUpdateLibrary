@@ -89,17 +89,17 @@ class DownloadApk(var context: Context) : AppCompatActivity() {
 
                 val fos = FileOutputStream(outputFile)
                 val inputStream = c.inputStream
-                val totalSize = c.contentLength //size of apk
+                val totalSize = c.contentLength.toFloat() //size of apk
 
                 val buffer = ByteArray(1024)
                 var len1: Int
-                var per: Int
-                var downloaded = 0
+                var per: Float
+                var downloaded = 0f
                 while (inputStream.read(buffer).also { len1 = it } != -1) {
                     fos.write(buffer, 0, len1)
                     downloaded += len1
                     per = (downloaded * 100 / totalSize)
-                    publishProgress(per)
+                    publishProgress(per.toInt())
                 }
                 fos.close()
                 inputStream.close()
