@@ -131,17 +131,17 @@ public class DownloadApk extends Activity{
                 FileOutputStream fos = new FileOutputStream(outputFile);
                 InputStream is = c.getInputStream();
 
-                int total_size = c.getContentLength();//size of apk
+                float total_size = c.getContentLength();//size of apk
 
                 byte[] buffer = new byte[1024];
                 int len1 = 0;
-                int per = 0;
-                int downloaded=0;
+                float per = 0;
+                float downloaded=0;
                 while ((len1 = is.read(buffer)) != -1) {
                     fos.write(buffer, 0, len1);
                     downloaded +=len1;
-                    per = (int) (downloaded * 100 / total_size);
-                    publishProgress(per);
+                    per = (downloaded * 100 / total_size);
+                    publishProgress((int) per);
                 }
                 fos.close();
                 is.close();
