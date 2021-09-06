@@ -2,8 +2,13 @@
 Android App Update Library can be used for downloading the Apk from a link , Save it to External or Internal Storage, Than automatic installing the apk. Remember to add provider xml and android runtime permission before using this library. See sample use in app folder.
 
 ### Changelog 
+    Version: 1.0.4
 
-    Version : 1.0.3 
+    Replace Java code with Kotlin
+    Add optional parameter for setting filename of apk file
+    Smaller updates and optional parameter hint
+
+    Version : 1.0.3
     
     Update Target SDK Version To 27 ( Android Oreo)
     Added Permission For Package Install For Android Oreo.
@@ -32,7 +37,7 @@ Add it in your root build.gradle at the end of repositories: </br>
 #### Step 2. Add the dependency
 
 	dependencies {
-	        implementation 'com.github.Piashsarker:AndroidAppUpdateLibrary:1.0.3'
+	        implementation 'com.github.Piashsarker:AndroidAppUpdateLibrary:1.0.4'
 	}
   
   
