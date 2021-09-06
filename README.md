@@ -32,7 +32,7 @@ Add it in your root build.gradle at the end of repositories: </br>
 #### Step 2. Add the dependency
 
 	dependencies {
-	        compile 'com.github.Piashsarker:AndroidAppUpdateLibrary:1.0.3'
+	        implementation 'com.github.Piashsarker:AndroidAppUpdateLibrary:1.0.3'
 	}
   
   
@@ -40,29 +40,29 @@ Add it in your root build.gradle at the end of repositories: </br>
 
 Remember to add below  permission in `Manifest.xml file` . And Also add runtime permission for (Version => Marshmallow ). See the sample app. 
 
-     <uses-permission android:name="android.permission.INTERNET"/>
+     <uses-permission android:name="android.permission.INTERNET" />
   
      <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
      
-      <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/> 
+     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" /> 
      
  
  ####  Step 4. Add Provider XML 
  Create a folder called `xml` in `res` folder. Create a xml file and named it `provider_paths`. Paste below code: 
  
     <?xml version="1.0" encoding="utf-8"?>
-      <paths xmlns:android="http://schemas.android.com/apk/res/android">
-        <external-path name="external_files" path="."/>
-      </paths>
+    <paths xmlns:android="http://schemas.android.com/apk/res/android">
+    	<external-path name="external_files" path="."/>
+    </paths>
       
- Add below code in your `manifest.xml` file.    
+ Add below code in your `AndroidManifest.xml` file.    
  
 
     <application
       
 	..............
         <provider
-            android:name="android.support.v4.content.FileProvider"
+            android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
             android:exported="false"
             android:grantUriPermissions="true">
@@ -83,8 +83,11 @@ Remember to add below  permission in `Manifest.xml file` . And Also add runtime 
 	
 	DownloadApk downloadApk = new DownloadApk(MainActivity.this);
        	
+	// With standard fileName 'App Update.apk'
 	downloadApk.startDownloadingApk(url);
- 
+	
+	// With custom fileName, e.g. 'Update 2.0'
+ 	downloadApk.startDownloadingApk(url, "Update 2.0");
  
  
  <b> You are Good To Go. Happy Coding </b> 
