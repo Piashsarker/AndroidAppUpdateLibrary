@@ -3,10 +3,14 @@ Android App Update Library can be used for downloading the Apk from a link , Sav
 
 ### Changelog 
     Version: 1.0.4
-
-    Replace Java code with Kotlin
-    Add optional parameter for setting filename of apk file
-    Smaller updates and optional parameter hint
+    - Updated dependencies (upgrade to AndroidX) (df0ce1a)
+    - Fixed failed install on lower Android versions (4603d10)
+    - Rewrite to Kotlin (8d32d31)
+    - Fixed calcualtion of download percentage (42e4dbb)
+    - Made installation possible on higher Android versions (8a9be2e)
+    - New optional file name parameter (fe4c1ab)
+  
+   Thanks to @cyb3rko 
 
     Version : 1.0.3
     
