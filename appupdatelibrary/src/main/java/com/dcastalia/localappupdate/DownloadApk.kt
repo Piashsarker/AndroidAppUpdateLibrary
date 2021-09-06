@@ -25,14 +25,19 @@ import java.net.URL
 
 class DownloadApk(var context: Context) : AppCompatActivity() {
 
-    fun startDownloadingApk(url: String) {
+    @JvmOverloads
+    fun startDownloadingApk(url: String, fileName: String = "App Update") {
         if (URLUtil.isValidUrl(url)) {
-            DownloadNewVersion(context, url).execute()
+            DownloadNewVersion(context, url, fileName).execute()
         }
     }
 
     @Suppress("DEPRECATION")
-    private class DownloadNewVersion(val context: Context, val downloadUrl: String): AsyncTask<String, Int, Boolean>() {
+    private class DownloadNewVersion(
+        val context: Context,
+        val downloadUrl: String,
+        val fileName: String
+    ): AsyncTask<String, Int, Boolean>() {
         private lateinit var bar: ProgressDialog
         override fun onPreExecute() {
             super.onPreExecute()
@@ -76,10 +81,10 @@ class DownloadApk(var context: Context) : AppCompatActivity() {
 
             try {
                 val path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString() + "/"
-                var outputFile = File(path + "app-debug.apk")
+                var outputFile = File("$path$fileName.apk")
                 var repetition = 1
                 while (outputFile.exists()) {
-                    outputFile = File(path + "app-debug ($repetition).apk")
+                    outputFile = File("$path$fileName ($repetition).apk")
                     repetition++
                 }
 
