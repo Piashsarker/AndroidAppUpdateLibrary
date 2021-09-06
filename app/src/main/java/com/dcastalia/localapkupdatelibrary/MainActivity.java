@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
-import com.dcastalia.localappupdatekt.DownloadApk;
+import com.dcastalia.localappupdate.DownloadApk;
 
 public class MainActivity extends AppCompatActivity {
     private static final int MY_PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE = 1001;
