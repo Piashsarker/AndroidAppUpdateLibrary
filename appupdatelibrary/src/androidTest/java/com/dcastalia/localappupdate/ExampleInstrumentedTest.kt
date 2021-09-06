@@ -1,4 +1,4 @@
-package com.dcastalia.localappupdatekt
+package com.dcastalia.localappupdate
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

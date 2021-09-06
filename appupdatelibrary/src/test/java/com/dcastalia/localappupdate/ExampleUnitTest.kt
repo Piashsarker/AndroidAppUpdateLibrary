@@ -1,4 +1,4 @@
-package com.dcastalia.localappupdatekt
+package com.dcastalia.localappupdate
 
 import org.junit.Test
 

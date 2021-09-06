@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
-import com.dcastalia.localappupdatekt.DownloadApk;
+import com.dcastalia.localappupdate.DownloadApk;
 
 public class MainActivity extends AppCompatActivity {
     private static final int MY_PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE = 1001;
@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
 
         DownloadApk downloadApk = new DownloadApk(MainActivity.this);
 
-        // For starting download call the method startDownloadingApk() by passing the URL
-        downloadApk.startDownloadingApk("https://github.com/Piashsarker/AndroidAppUpdateLibrary/raw/master/app-debug.apk");
+        // For starting download call the method startDownloadingApk() by passing the URL and the optional filename
+        downloadApk.startDownloadingApk("https://github.com/Piashsarker/AndroidAppUpdateLibrary/raw/master/app-debug.apk", "Update 2.0");
     }
 }
