@@ -31,6 +31,7 @@ class DownloadApk(var context: Context) : AppCompatActivity() {
         }
     }
 
+    @Suppress("DEPRECATION")
     private class DownloadNewVersion(val context: Context, val downloadUrl: String): AsyncTask<String, Int, Boolean>() {
         private lateinit var bar: ProgressDialog
         override fun onPreExecute() {
@@ -64,11 +65,9 @@ class DownloadApk(var context: Context) : AppCompatActivity() {
             super.onPostExecute(result)
             bar.dismiss()
             if (result != null && result) {
-                Toast.makeText(context, "Update Done", Toast.LENGTH_SHORT)
-                    .show()
+                Toast.makeText(context, "Update Done", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(context, "Error: Try Again", Toast.LENGTH_SHORT)
-                    .show()
+                Toast.makeText(context, "Error: Try Again", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -76,16 +75,23 @@ class DownloadApk(var context: Context) : AppCompatActivity() {
             var flag = false
 
             try {
+                val path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString() + "/"
+                var outputFile = File(path + "app-debug.apk")
+                var repetition = 1
+                while (outputFile.exists()) {
+                    outputFile = File(path + "app-debug ($repetition).apk")
+                    repetition++
+                }
+
+                val directory = File(path)
+                if (!directory.exists()) {
+                    directory.mkdirs()
+                }
+
                 val url = URL(downloadUrl)
                 val c = url.openConnection() as HttpURLConnection
                 c.requestMethod = "GET"
                 c.connect()
-                val path = Environment.getExternalStorageDirectory().toString() + "/Download/"
-                val file = File(path)
-                file.mkdirs()
-                val outputFile = File(file, "app-debug.apk")
-
-                if (outputFile.exists()) outputFile.delete()
 
                 val fos = FileOutputStream(outputFile)
                 val inputStream = c.inputStream
@@ -103,7 +109,7 @@ class DownloadApk(var context: Context) : AppCompatActivity() {
                 }
                 fos.close()
                 inputStream.close()
-                openNewVersion(path)
+                openNewVersion(outputFile.path)
                 flag = true
             } catch (e: MalformedURLException) {
                 Log.e("DownloadApk", "Update Error: " + e.message)
@@ -126,13 +132,14 @@ class DownloadApk(var context: Context) : AppCompatActivity() {
             context.startActivity(intent)
         }
 
-        private fun getUriFromFile(location: String): Uri {
-            return if (Build.VERSION.SDK_INT < 24) {
-                Uri.fromFile(File(location + "app-debug.apk"))
+        private fun getUriFromFile(filePath: String): Uri {
+            return if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+                Uri.fromFile(File(filePath))
             } else {
                 FileProvider.getUriForFile(
-                    context, context.packageName + ".provider",
-                    File(location + "app-debug.apk")
+                    context,
+                    context.packageName + ".provider",
+                    File(filePath)
                 )
             }
         }
