@@ -28,7 +28,7 @@ Android App Update Library can be used for downloading the Apk from a link , Sav
 
 #### Step 1. Add the JitPack repository to your build file 
 
-Add it in your root build.gradle at the end of repositories: </br> 
+Add it in your project level root build.gradle at the end of repositories: </br> 
 
 
 	allprojects {
@@ -38,7 +38,7 @@ Add it in your root build.gradle at the end of repositories: </br>
 		}
 	}
   
-#### Step 2. Add the dependency
+#### Step 2. Add the dependency in your app build.gradle file 
 
 	dependencies {
 	        implementation 'com.github.Piashsarker:AndroidAppUpdateLibrary:1.0.4'
