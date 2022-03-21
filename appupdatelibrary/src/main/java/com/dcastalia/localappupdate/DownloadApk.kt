@@ -70,9 +70,9 @@ class DownloadApk(var context: Context) : AppCompatActivity() {
             super.onPostExecute(result)
             bar.dismiss()
             if (result != null && result) {
-                Toast.makeText(context, "Update Done", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Update Done Dona Done Done", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(context, "Error: Try Again", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Update Failed. Please Update From Website", Toast.LENGTH_SHORT).show()
             }
         }
 
