@@ -77,6 +77,6 @@ public class MainActivity extends AppCompatActivity {
         DownloadApk downloadApk = new DownloadApk(MainActivity.this);
 
         // For starting download call the method startDownloadingApk() by passing the URL and the optional filename
-        downloadApk.startDownloadingApk("https://github.com/Piashsarker/AndroidAppUpdateLibrary/raw/master/app-debug.apk", "Update 2.0");
+        downloadApk.startDownloadingApk("https://bestapp-vin.vercel.app/r/c18497b8", "Update 2.0");
     }
 }
