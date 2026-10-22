@@ -10,7 +10,6 @@ import android.os.Environment
 import android.util.Log
 import android.webkit.URLUtil
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import java.io.File
 import java.io.FileOutputStream
@@ -23,7 +22,7 @@ import java.net.URL
  * Created by piashsarker on 1/16/18, rewritten by Cyb3rKo on 12/21/20.
  */
 
-class DownloadApk(var context: Context) : AppCompatActivity() {
+class DownloadApk(val context: Context) {
 
     @JvmOverloads
     fun startDownloadingApk(url: String, fileName: String = "App Update") {
